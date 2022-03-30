@@ -18,6 +18,13 @@
         <module>kziuron-pokedex-ui</module>
     </modules>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+        <java.version>16</java.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <!-- project -->
