@@ -1,8 +1,8 @@
 package dev.drf.pokedex.model.dictionary;
 
-import dev.drf.pokedex.model.BusinessEntity;
+import dev.drf.pokedex.model.BaseEntity;
 
-public abstract class Dictionary extends BusinessEntity {
+public abstract class Dictionary extends BaseEntity {
     private long code;
     private String name;
 

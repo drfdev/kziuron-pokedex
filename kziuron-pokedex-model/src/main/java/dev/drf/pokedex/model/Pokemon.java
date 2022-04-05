@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Описание покемона
  */
-public class Pokemon extends VersionedEntity {
+public class Pokemon extends BusinessEntity {
     /**
      * Тип покемона
      */

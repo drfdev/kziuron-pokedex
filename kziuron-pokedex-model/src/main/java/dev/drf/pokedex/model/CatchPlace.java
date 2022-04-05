@@ -2,7 +2,7 @@ package dev.drf.pokedex.model;
 
 import dev.drf.pokedex.model.dictionary.Region;
 
-public class CatchPlace extends VersionedEntity {
+public class CatchPlace extends BusinessEntity {
     /**
      * Регион, в котором покемон был пойман
      */

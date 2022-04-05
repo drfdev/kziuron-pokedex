@@ -2,7 +2,7 @@ package dev.drf.pokedex.model;
 
 import java.time.LocalDate;
 
-public class CatchDate extends VersionedEntity {
+public class CatchDate extends BusinessEntity {
     /**
      * Дата поимки покемона
      */

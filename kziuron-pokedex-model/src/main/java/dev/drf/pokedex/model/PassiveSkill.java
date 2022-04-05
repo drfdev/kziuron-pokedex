@@ -2,7 +2,7 @@ package dev.drf.pokedex.model;
 
 import dev.drf.pokedex.model.dictionary.BonusType;
 
-public class PassiveSkill extends VersionedEntity {
+public class PassiveSkill extends BusinessEntity {
     /**
      * Наименование умения
      */

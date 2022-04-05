@@ -2,7 +2,7 @@ package dev.drf.pokedex.model;
 
 import java.time.Instant;
 
-public abstract class VersionedEntity extends BusinessEntity {
+public abstract class VersionedEntity extends BaseEntity {
     private Integer version;
     private Instant versionDate;
 
@@ -12,6 +12,14 @@ public abstract class VersionedEntity extends BusinessEntity {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public Instant getVersionDate() {
+        return versionDate;
+    }
+
+    public void setVersionDate(Instant versionDate) {
+        this.versionDate = versionDate;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package dev.drf.pokedex.model;
 
-public class CombatStats extends VersionedEntity {
+public class CombatStats extends BusinessEntity {
     private Integer hp;
     private Integer attack;
     private Integer defence;

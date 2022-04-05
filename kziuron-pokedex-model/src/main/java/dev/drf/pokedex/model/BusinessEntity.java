@@ -1,21 +1,22 @@
 package dev.drf.pokedex.model;
 
-public abstract class BusinessEntity implements IdentifiableEntity {
-    private Long id;
+import java.time.Instant;
 
-    @Override
-    public Long getId() {
-        return id;
+public abstract class BusinessEntity extends VersionedEntity {
+    private Instant endDate;
+
+    public Instant getEndDate() {
+        return endDate;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEndDate(Instant endDate) {
+        this.endDate = endDate;
     }
 
     @Override
     public String toString() {
         return "BusinessEntity{" +
-                "id=" + id +
-                '}';
+                "endDate=" + endDate +
+                "} " + super.toString();
     }
 }

@@ -1,6 +1,6 @@
 package dev.drf.pokedex.model;
 
-public class PokemonName extends VersionedEntity {
+public class PokemonName extends BusinessEntity {
     /**
      * Имя покемона
      */

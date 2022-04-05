@@ -3,7 +3,7 @@ package dev.drf.pokedex.model;
 import dev.drf.pokedex.model.dictionary.ElementType;
 import dev.drf.pokedex.model.dictionary.SkillType;
 
-public class ActiveSkill extends VersionedEntity {
+public class ActiveSkill extends BusinessEntity {
     /**
      * Наименование умения
      */
