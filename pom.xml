@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>kziuron-pokedex-api</module>
         <module>kziuron-pokedex-model</module>
         <module>kziuron-pokedex-common</module>
         <module>kziuron-pokedex-business</module>
@@ -23,15 +24,35 @@
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
         <java.version>16</java.version>
+
+        <!-- misc -->
+        <jsr305.version>3.0.2</jsr305.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- project -->
+            <!-- project dependencies -->
             <dependency>
                 <groupId>dev.drf.pokedex</groupId>
                 <artifactId>kziuron-pokedex-model</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-business-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-core-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- misc -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${jsr305.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
