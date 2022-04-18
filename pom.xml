@@ -17,6 +17,7 @@
         <module>kziuron-pokedex-business</module>
         <module>kziuron-pokedex-core</module>
         <module>kziuron-pokedex-ui</module>
+        <module>kziuron-pokedex-transport</module>
     </modules>
 
     <properties>
@@ -45,6 +46,28 @@
             <dependency>
                 <groupId>dev.drf.pokedex</groupId>
                 <artifactId>kziuron-pokedex-core-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- transport -->
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-transport-single</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-transport-client-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-transport-kafka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-transport-microservices</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
