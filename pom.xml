@@ -18,6 +18,7 @@
         <module>kziuron-pokedex-core</module>
         <module>kziuron-pokedex-ui</module>
         <module>kziuron-pokedex-transport</module>
+        <module>kziuron-pokedex-app</module>
     </modules>
 
     <properties>

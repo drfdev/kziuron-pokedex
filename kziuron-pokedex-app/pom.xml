@@ -10,11 +10,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kziuron-pokedex-ui</artifactId>
+    <artifactId>kziuron-pokedex-app</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>kziuron-pokedex-ui-console</module>
+        <module>kziuron-pokedex-app-single-console</module>
     </modules>
 
 

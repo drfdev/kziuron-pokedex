@@ -6,16 +6,11 @@
 
     <parent>
         <groupId>dev.drf.pokedex</groupId>
-        <artifactId>kziuron-pokedex</artifactId>
+        <artifactId>kziuron-pokedex-app</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kziuron-pokedex-ui</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>kziuron-pokedex-ui-console</module>
-    </modules>
+    <artifactId>kziuron-pokedex-app-single-console</artifactId>
 
 
 </project>
