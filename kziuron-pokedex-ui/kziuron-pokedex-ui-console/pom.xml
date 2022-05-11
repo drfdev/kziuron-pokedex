@@ -18,11 +18,22 @@
             <groupId>dev.drf.pokedex</groupId>
             <artifactId>kziuron-pokedex-model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-business-api</artifactId>
+        </dependency>
 
         <!-- misc -->
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

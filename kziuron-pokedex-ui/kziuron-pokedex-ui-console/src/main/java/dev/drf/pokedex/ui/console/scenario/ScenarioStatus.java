@@ -1,4 +1,5 @@
 package dev.drf.pokedex.ui.console.scenario;
 
-public record ScenarioParameters() {
+public enum ScenarioStatus {
+    SUCCESS, ERROR
 }

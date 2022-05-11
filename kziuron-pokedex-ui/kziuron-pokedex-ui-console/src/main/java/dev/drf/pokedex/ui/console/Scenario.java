@@ -1,6 +1,6 @@
 package dev.drf.pokedex.ui.console;
 
-import dev.drf.pokedex.ui.console.scenario.ScenarioParameters;
+import dev.drf.pokedex.ui.console.scenario.ScenarioContext;
 import dev.drf.pokedex.ui.console.scenario.ScenarioResult;
 
 import javax.annotation.Nonnull;
@@ -10,9 +10,9 @@ import javax.annotation.Nonnull;
  * Содержит ключ команды, для которой запускается сценарий
  * и метод запуска сценария
  */
-public interface Scenario {
+public interface Scenario<C extends ScenarioContext, R> {
     @Nonnull
-    ScenarioResult execute(@Nonnull ScenarioParameters parameters);
+    ScenarioResult<R> execute(@Nonnull C context);
 
     @Nonnull
     Command key();

@@ -4,10 +4,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * Контекст консоли
+ * Сервис для работы с консолью
  * Умеет записывать и читать в/из консоли
  */
-public interface ConsoleContext {
+public interface ConsoleService {
     void write(@Nonnull String text);
 
     @Nullable
