@@ -44,7 +44,7 @@ public class AuthorizationScenario extends AbstractMultipleAttemptsScenario<Auth
     @Override
     protected ScenarioResult<AuthorizationToken> singleAttempt(@Nonnull AuthorizationContext context,
                                                                int attempt) {
-        consoleService.write(String.format("Authorization, attempt %s from %s", attempt, DEFAULT_ATTEMPTS_COUNT));
+        consoleService.write(String.format("Authorization, attempt %s from %s", (attempt + 1), DEFAULT_ATTEMPTS_COUNT));
         // login
         consoleService.write("login: ");
         String login = consoleService.read();
