@@ -4,21 +4,26 @@ import dev.drf.pokedex.ui.console.ConsoleService;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Scanner;
 
 /**
  * Реализация контекста консоли
- * TODO: пока не реализовано
  */
 public class ConsoleServiceImpl implements ConsoleService {
+    private final Scanner scanner;
+
+    public ConsoleServiceImpl(@Nonnull Scanner scanner) {
+        this.scanner = scanner;
+    }
+
     @Override
     public void write(@Nonnull String text) {
-        // TODO not implemented
+        System.out.println(text);
     }
 
     @Nullable
     @Override
     public String read() {
-        // TODO not implemented
-        return null;
+        return scanner.nextLine();
     }
 }
