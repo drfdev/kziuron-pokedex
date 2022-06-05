@@ -7,11 +7,11 @@ import dev.drf.pokedex.api.common.ApiResult;
 import dev.drf.pokedex.model.Pokemon;
 import dev.drf.pokedex.ui.console.ConsoleService;
 import dev.drf.pokedex.ui.console.command.Commands;
+import dev.drf.pokedex.ui.console.error.ConsoleUIException;
 import dev.drf.pokedex.ui.console.scenario.ScenarioError;
 import dev.drf.pokedex.ui.console.scenario.ScenarioResult;
 import dev.drf.pokedex.ui.console.scenario.ScenarioStatus;
 import dev.drf.pokedex.ui.console.scenario.ScenarioStep;
-import dev.drf.pokedex.ui.console.scenario.context.DataType;
 import dev.drf.pokedex.ui.console.scenario.context.SearchContext;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,8 +20,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static dev.drf.pokedex.ui.console.error.ErrorCodes.INCORRECT_PARAMETERS;
-import static dev.drf.pokedex.ui.console.error.ErrorCodes.INNER_ERROR;
+import static dev.drf.pokedex.ui.console.error.ErrorCodes.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -45,7 +44,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnErrorResult_whenErrorApiResult() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("123");
@@ -62,7 +61,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnErrorResult_whenPokemonWriteStepReturnError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("123");
@@ -83,7 +82,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleServiceReturnNullValue() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn(null);
@@ -100,7 +99,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleServiceReturnNotNumericValue() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("not-numeric");
@@ -117,7 +116,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnSuccessResult_whenSuccessApiResult() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("123");
@@ -136,7 +135,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleErrorThrowError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenThrow(new IllegalArgumentException("test error"));
@@ -153,7 +152,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnErrorResult_whenPokemonReadStepThrowError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("123");
@@ -174,7 +173,7 @@ class GetScenarioTest {
     @Test
     void shouldReturnErrorResult_whenPokemonApiServiceThrowError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("123");
@@ -194,5 +193,45 @@ class GetScenarioTest {
     void shouldCorrectKey() {
         // act - assert
         assertEquals(Commands.GET, scenario.key());
+    }
+
+    @Test
+    void shouldReturnErrorResultWithCorrectErrorCode_whenPokemonReadStepThrowConsoleUIError() {
+        // arrange
+        SearchContext context = SearchContext.ofConsole();
+
+        Mockito.when(consoleService.read())
+                .thenReturn("123");
+        Mockito.when(pokemonApiService.get(anyLong()))
+                .thenReturn(ApiResult.success(new Pokemon()));
+        Mockito.when(pokemonWriteStep.process(any(), any()))
+                .thenThrow(new ConsoleUIException(AUTHORIZATION_FAILED, "test error"));
+
+        // act
+        ScenarioResult<Pokemon> result = scenario.execute(context);
+
+        // assert
+        assertEquals(ScenarioStatus.ERROR, result.status());
+        assertNotNull(result.error());
+        assertEquals(AUTHORIZATION_FAILED.getCode(), result.error().code());
+    }
+
+    @Test
+    void shouldReturnErrorResultWithCorrectErrorCode_whenPokemonApiServiceThrowConsoleUIError() {
+        // arrange
+        SearchContext context = SearchContext.ofConsole();
+
+        Mockito.when(consoleService.read())
+                .thenReturn("123");
+        Mockito.when(pokemonApiService.get(anyLong()))
+                .thenThrow(new ConsoleUIException(NULL_API_RESULT, "test error"));
+
+        // act
+        ScenarioResult<Pokemon> result = scenario.execute(context);
+
+        // assert
+        assertEquals(ScenarioStatus.ERROR, result.status());
+        assertNotNull(result.error());
+        assertEquals(NULL_API_RESULT.getCode(), result.error().code());
     }
 }

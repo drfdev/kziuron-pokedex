@@ -11,6 +11,11 @@ public enum ErrorCodes {
     // parameters
     INCORRECT_PARAMETERS("incorrect-parameters"),
     NULL_API_RESULT("null-api-result"),
+    // scenario step
+    NULL_PARSE_RESULT("null-parse-result"),
+    NULL_JSON_RESULT("null-json-result"),
+    NULL_PATH("null-path"),
+    UNKNOWN_DATA_TYPE("unknown-data-type"),
     ;
 
     private final String stringCode;

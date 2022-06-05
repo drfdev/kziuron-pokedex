@@ -7,10 +7,10 @@ import dev.drf.pokedex.api.common.ApiResult;
 import dev.drf.pokedex.model.Pokemon;
 import dev.drf.pokedex.ui.console.ConsoleService;
 import dev.drf.pokedex.ui.console.command.Commands;
+import dev.drf.pokedex.ui.console.error.ConsoleUIException;
 import dev.drf.pokedex.ui.console.scenario.ScenarioResult;
 import dev.drf.pokedex.ui.console.scenario.ScenarioStatus;
 import dev.drf.pokedex.ui.console.scenario.ScenarioStep;
-import dev.drf.pokedex.ui.console.scenario.context.DataType;
 import dev.drf.pokedex.ui.console.scenario.context.ModifyContext;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +20,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.nio.file.Path;
-import java.time.Instant;
 
-import static dev.drf.pokedex.ui.console.error.ErrorCodes.INCORRECT_PARAMETERS;
-import static dev.drf.pokedex.ui.console.error.ErrorCodes.INNER_ERROR;
+import static dev.drf.pokedex.ui.console.error.ErrorCodes.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -46,7 +44,7 @@ class DeactivateScenarioTest {
     @Test
     void shouldReturnErrorResult_whenErrorApiResult() {
         // arrange
-        ModifyContext context = new ModifyContext(DataType.CONSOLE, Instant.now());
+        ModifyContext context = ModifyContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("test-value");
@@ -65,7 +63,7 @@ class DeactivateScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleServiceReturnNullValue() {
         // arrange
-        ModifyContext context = new ModifyContext(DataType.CONSOLE, Instant.now());
+        ModifyContext context = ModifyContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn(null);
@@ -82,7 +80,7 @@ class DeactivateScenarioTest {
     @Test
     void shouldReturnSuccessResult_whenSuccessApiResult() {
         // arrange
-        ModifyContext context = new ModifyContext(DataType.CONSOLE, Instant.now());
+        ModifyContext context = ModifyContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("test-value");
@@ -101,7 +99,7 @@ class DeactivateScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleErrorThrowError() {
         // arrange
-        ModifyContext context = new ModifyContext(DataType.CONSOLE, Instant.now());
+        ModifyContext context = ModifyContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenThrow(new IllegalArgumentException("test error"));
@@ -118,7 +116,7 @@ class DeactivateScenarioTest {
     @Test
     void shouldReturnErrorResult_whenPokemonReadStepThrowError() {
         // arrange
-        ModifyContext context = new ModifyContext(DataType.CONSOLE, Instant.now());
+        ModifyContext context = ModifyContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("test-value");
@@ -137,7 +135,7 @@ class DeactivateScenarioTest {
     @Test
     void shouldReturnErrorResult_whenPokemonApiServiceThrowError() {
         // arrange
-        ModifyContext context = new ModifyContext(DataType.CONSOLE, Instant.now());
+        ModifyContext context = ModifyContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("test-value");
@@ -159,5 +157,62 @@ class DeactivateScenarioTest {
     void shouldCorrectKey() {
         // act - assert
         assertEquals(Commands.DEACTIVATE, scenario.key());
+    }
+
+    @Test
+    void shouldReturnErrorResultWithCorrectErrorCode_whenConsoleErrorThrowConsoleUIError() {
+        // arrange
+        ModifyContext context = ModifyContext.ofConsole();
+
+        Mockito.when(consoleService.read())
+                .thenThrow(new ConsoleUIException(NULL_PARSE_RESULT, "test error"));
+
+        // act
+        ScenarioResult<Pokemon> result = scenario.execute(context);
+
+        // assert
+        assertEquals(ScenarioStatus.ERROR, result.status());
+        assertNotNull(result.error());
+        assertEquals(NULL_PARSE_RESULT.getCode(), result.error().code());
+    }
+
+    @Test
+    void shouldReturnErrorResultWithCorrectErrorCode_whenPokemonReadStepThrowConsoleUIError() {
+        // arrange
+        ModifyContext context = ModifyContext.ofConsole();
+
+        Mockito.when(consoleService.read())
+                .thenReturn("test-value");
+        Mockito.when(pokemonReadStep.process(any(), any()))
+                .thenThrow(new ConsoleUIException(NULL_API_RESULT, "test error"));
+
+        // act
+        ScenarioResult<Pokemon> result = scenario.execute(context);
+
+        // assert
+        assertEquals(ScenarioStatus.ERROR, result.status());
+        assertNotNull(result.error());
+        assertEquals(NULL_API_RESULT.getCode(), result.error().code());
+    }
+
+    @Test
+    void shouldReturnErrorResultWithCorrectErrorCode_whenPokemonApiServiceThrowConsoleUIError() {
+        // arrange
+        ModifyContext context = ModifyContext.ofConsole();
+
+        Mockito.when(consoleService.read())
+                .thenReturn("test-value");
+        Mockito.when(pokemonReadStep.process(any(), any()))
+                .thenReturn(new Pokemon());
+        Mockito.when(pokemonApiService.deactivate(any()))
+                .thenThrow(new ConsoleUIException(NULL_PATH, "test error"));
+
+        // act
+        ScenarioResult<Pokemon> result = scenario.execute(context);
+
+        // assert
+        assertEquals(ScenarioStatus.ERROR, result.status());
+        assertNotNull(result.error());
+        assertEquals(NULL_PATH.getCode(), result.error().code());
     }
 }

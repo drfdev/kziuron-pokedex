@@ -7,11 +7,11 @@ import dev.drf.pokedex.api.common.ApiResult;
 import dev.drf.pokedex.model.Pokemon;
 import dev.drf.pokedex.ui.console.ConsoleService;
 import dev.drf.pokedex.ui.console.command.Commands;
+import dev.drf.pokedex.ui.console.error.ConsoleUIException;
 import dev.drf.pokedex.ui.console.scenario.ScenarioError;
 import dev.drf.pokedex.ui.console.scenario.ScenarioResult;
 import dev.drf.pokedex.ui.console.scenario.ScenarioStatus;
 import dev.drf.pokedex.ui.console.scenario.ScenarioStep;
-import dev.drf.pokedex.ui.console.scenario.context.DataType;
 import dev.drf.pokedex.ui.console.scenario.context.SearchContext;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,8 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static dev.drf.pokedex.ui.console.error.ErrorCodes.INCORRECT_PARAMETERS;
-import static dev.drf.pokedex.ui.console.error.ErrorCodes.INNER_ERROR;
+import static dev.drf.pokedex.ui.console.error.ErrorCodes.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.*;
@@ -47,7 +46,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnErrorResult_whenErrorApiResult() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("12");
@@ -64,7 +63,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnErrorResult_whenPokemonWriteStepReturnError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("12");
@@ -85,7 +84,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleServiceReturnNullValue() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn(null);
@@ -102,7 +101,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleServiceReturnNotNumericValue() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("not-numeric");
@@ -119,7 +118,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnSuccessResult_whenSuccessApiResult() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("12");
@@ -138,7 +137,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnErrorResult_whenConsoleErrorThrowError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenThrow(new IllegalArgumentException("test error"));
@@ -155,7 +154,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnErrorResult_whenPokemonReadStepThrowError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("12");
@@ -176,7 +175,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldReturnErrorResult_whenSearchPokemonApiServiceThrowError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
 
         Mockito.when(consoleService.read())
                 .thenReturn("12");
@@ -201,7 +200,7 @@ class SearchByVersionScenarioTest {
     @Test
     void shouldCorrectConsoleRead_whenExecuteWithoutError() {
         // arrange
-        SearchContext context = new SearchContext(DataType.CONSOLE);
+        SearchContext context = SearchContext.ofConsole();
         AtomicInteger counter = new AtomicInteger();
 
         Mockito.when(consoleService.read())
@@ -229,5 +228,24 @@ class SearchByVersionScenarioTest {
 
         assertEquals(123L, id);
         assertEquals(5, version);
+    }
+
+    @Test
+    void shouldReturnErrorResultWithCorrectErrorCode_whenSearchPokemonApiServiceThrowConsoleUIError() {
+        // arrange
+        SearchContext context = SearchContext.ofConsole();
+
+        Mockito.when(consoleService.read())
+                .thenReturn("12");
+        Mockito.when(searchPokemonApiService.getByVersion(anyLong(), anyInt()))
+                .thenThrow(new ConsoleUIException(NULL_JSON_RESULT, "test error"));
+
+        // act
+        ScenarioResult<Pokemon> result = scenario.execute(context);
+
+        // assert
+        assertEquals(ScenarioStatus.ERROR, result.status());
+        assertNotNull(result.error());
+        assertEquals(NULL_JSON_RESULT.getCode(), result.error().code());
     }
 }
