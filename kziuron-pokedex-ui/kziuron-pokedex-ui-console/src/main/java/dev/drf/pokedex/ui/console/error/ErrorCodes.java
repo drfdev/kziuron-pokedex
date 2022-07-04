@@ -16,6 +16,8 @@ public enum ErrorCodes {
     NULL_JSON_RESULT("null-json-result"),
     NULL_PATH("null-path"),
     UNKNOWN_DATA_TYPE("unknown-data-type"),
+    // converter
+    JSON_CONVERTER_ERROR("json-converter-error"),
     ;
 
     private final String stringCode;
