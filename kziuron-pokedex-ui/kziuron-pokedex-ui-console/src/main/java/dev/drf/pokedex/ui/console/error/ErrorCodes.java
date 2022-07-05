@@ -18,6 +18,9 @@ public enum ErrorCodes {
     UNKNOWN_DATA_TYPE("unknown-data-type"),
     // converter
     JSON_CONVERTER_ERROR("json-converter-error"),
+    // Files
+    FILE_WRITE_ERROR("file-write-error"),
+    FILE_READ_ERROR("file-read-error"),
     ;
 
     private final String stringCode;
