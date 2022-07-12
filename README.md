@@ -16,3 +16,9 @@
 
 Папка **notes** - заметки и описания по проекту
 Папка **notes/step** - заметки по шагам выполнения проекта
+
+---
+
+Git long names:
+`git config --system core.longpaths true`
+`git config core.longpaths true`

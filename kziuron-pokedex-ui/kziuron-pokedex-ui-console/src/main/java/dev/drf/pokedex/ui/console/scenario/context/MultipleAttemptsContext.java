@@ -55,4 +55,9 @@ public final class MultipleAttemptsContext<C extends ScenarioContext> implements
                 ", currentAttempt=" + currentAttempt +
                 '}';
     }
+
+    @Override
+    public ContextType contextType() {
+        return context.contextType();
+    }
 }

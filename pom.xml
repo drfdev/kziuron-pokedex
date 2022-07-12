@@ -32,6 +32,7 @@
         <jackson.version>2.13.3</jackson.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>31.1-jre</guava.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
 
         <!-- test -->
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
@@ -110,6 +111,11 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
 
 

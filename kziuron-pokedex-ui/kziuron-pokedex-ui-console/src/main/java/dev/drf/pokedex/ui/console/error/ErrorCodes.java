@@ -21,6 +21,10 @@ public enum ErrorCodes {
     // Files
     FILE_WRITE_ERROR("file-write-error"),
     FILE_READ_ERROR("file-read-error"),
+    // command detect
+    UNKNOWN_COMMAND("unknown-command"),
+    UNKNOWN_CONTEXT_TYPE("unknown-context-type"),
+    NO_REQUIRED_PARAMETER("no-required-parameter"),
     ;
 
     private final String stringCode;

@@ -23,4 +23,9 @@ public record ModifyContext(@Nonnull DataType dataType,
     public static ModifyContext ofFile() {
         return new ModifyContext(DataType.FILE, Instant.now());
     }
+
+    @Override
+    public ContextType contextType() {
+        return ContextType.MODIFY;
+    }
 }

@@ -25,4 +25,9 @@ public record SearchContext(@Nonnull DataType dataType,
         requireNonNull(path);
         return new SearchContext(DataType.FILE, path);
     }
+
+    @Override
+    public ContextType contextType() {
+        return ContextType.SEARCH;
+    }
 }
