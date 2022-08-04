@@ -15,7 +15,18 @@
 
     <modules>
         <module>kziuron-pokedex-ui-console</module>
+        <module>kziuron-pokedex-ui-console-spring</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- project -->
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-ui-console</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
