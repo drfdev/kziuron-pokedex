@@ -11,69 +11,27 @@
     </parent>
 
     <artifactId>kziuron-pokedex-ui-console</artifactId>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <!-- project -->
-        <dependency>
-            <groupId>dev.drf.pokedex</groupId>
-            <artifactId>kziuron-pokedex-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>dev.drf.pokedex</groupId>
-            <artifactId>kziuron-pokedex-business-api</artifactId>
-        </dependency>
+    <modules>
+        <module>kziuron-pokedex-ui-console-business</module>
+        <module>kziuron-pokedex-ui-console-spring</module>
+    </modules>
 
-        <!-- misc -->
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <!-- test -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <!-- project -->
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-ui-console-business</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-ui-console-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
