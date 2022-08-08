@@ -13,9 +13,16 @@
     <artifactId>kziuron-pokedex-common</artifactId>
 
     <dependencies>
+        <!-- project -->
         <dependency>
             <groupId>dev.drf.pokedex</groupId>
             <artifactId>kziuron-pokedex-model</artifactId>
+        </dependency>
+
+        <!-- misc -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
         </dependency>
     </dependencies>
 

@@ -62,6 +62,11 @@
                 <artifactId>kziuron-pokedex-core-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- transport -->
             <dependency>
