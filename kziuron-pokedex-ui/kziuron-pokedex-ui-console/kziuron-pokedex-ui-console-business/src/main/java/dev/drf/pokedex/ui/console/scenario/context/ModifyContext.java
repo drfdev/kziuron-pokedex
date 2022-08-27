@@ -9,7 +9,7 @@ import java.time.Instant;
  * Контекст для создания, обновления и других модификаций данных
  *
  * @param dataType      тип вывода данных
- * @param operationTime врем совершения операции
+ * @param operationTime время совершения операции
  */
 public record ModifyContext(@Nonnull DataType dataType,
                             @Nonnull Instant operationTime) implements ScenarioContext {

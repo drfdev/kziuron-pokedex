@@ -11,6 +11,7 @@ import dev.drf.pokedex.ui.console.command.ScenarioContextBuilder;
 import dev.drf.pokedex.ui.console.context.ConsoleServiceImpl;
 import dev.drf.pokedex.ui.console.files.FileServiceImpl;
 import dev.drf.pokedex.ui.console.json.PokemonJsonConverter;
+import dev.drf.pokedex.ui.console.json.PokemonJsonListConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -56,6 +57,11 @@ public class UiConsoleSpringConfiguration {
     @Bean
     public JsonConverter<Pokemon> pokemonJsonConverter() {
         return new PokemonJsonConverter();
+    }
+
+    @Bean
+    public JsonConverter<List<Pokemon>> pokemonJsonListConverter() {
+        return new PokemonJsonListConverter();
     }
 
 }

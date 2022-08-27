@@ -2,8 +2,7 @@ package dev.drf.pokedex.ui.console;
 
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.*;
 
 public final class MatcherUtils {
     private MatcherUtils() {
@@ -15,5 +14,12 @@ public final class MatcherUtils {
 
     public static <T> Matcher<T> hasDictionary(String dictionary, long code) {
         return hasProperty(dictionary, hasProperty("code", equalTo(code)));
+    }
+
+    public static <T> Matcher<T> hasDictionary(String dictionary, long code, String name) {
+        return hasProperty(dictionary, allOf(
+                hasProperty("code", equalTo(code)),
+                hasProperty("name", equalTo(name))
+        ));
     }
 }
