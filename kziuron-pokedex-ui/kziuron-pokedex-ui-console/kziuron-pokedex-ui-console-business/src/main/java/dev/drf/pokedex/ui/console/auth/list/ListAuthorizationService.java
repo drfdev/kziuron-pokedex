@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
         ListAuthorizationConfig.class
 })
 public class ListAuthorizationService implements AuthorizationService {
+    private static final System.Logger LOGGER = System.getLogger(ListAuthorizationService.class.getName());
+
     private final ListAuthorizationConfig config;
     private final Map<String, String> authMap;
 

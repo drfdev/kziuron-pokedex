@@ -19,6 +19,8 @@ import static dev.drf.pokedex.ui.console.error.ErrorCodes.INCORRECT_PARAMETERS;
 import static dev.drf.pokedex.ui.console.utils.ScenarioResultUtils.toScenarioResult;
 
 public class UpdateScenario extends AbstractScenario<ModifyContext, Pokemon> {
+    private static final System.Logger LOGGER = System.getLogger(UpdateScenario.class.getName());
+
     private final ConsoleService consoleService;
     private final PokemonApiService pokemonApiService;
     private final ScenarioStep<Path, Pokemon, ModifyContext> pokemonReadStep;
@@ -45,7 +47,13 @@ public class UpdateScenario extends AbstractScenario<ModifyContext, Pokemon> {
         Pokemon pokemon = pokemonReadStep.process(path, context);
 
         ApiResult<Pokemon> result = pokemonApiService.update(pokemon);
+        LOGGER.log(System.Logger.Level.INFO, "Get result: {}", result);
         return toScenarioResult(result);
+    }
+
+    @Override
+    protected System.Logger getLogger() {
+        return LOGGER;
     }
 
     @Nonnull

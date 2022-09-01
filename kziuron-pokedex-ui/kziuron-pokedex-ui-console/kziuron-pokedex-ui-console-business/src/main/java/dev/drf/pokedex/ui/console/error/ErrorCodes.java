@@ -25,6 +25,7 @@ public enum ErrorCodes {
     UNKNOWN_COMMAND("unknown-command"),
     UNKNOWN_CONTEXT_TYPE("unknown-context-type"),
     NO_REQUIRED_PARAMETER("no-required-parameter"),
+    NO_SCENARIO_FOR_COMMAND("no-scenario"),
     ;
 
     private final String stringCode;

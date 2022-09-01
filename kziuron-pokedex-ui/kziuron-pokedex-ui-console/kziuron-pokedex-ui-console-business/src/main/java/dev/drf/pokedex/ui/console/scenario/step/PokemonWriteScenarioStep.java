@@ -19,6 +19,8 @@ import java.nio.file.Path;
  * На экран или в файл в зависимости от параметра вывода
  */
 public class PokemonWriteScenarioStep implements ScenarioStep<Pokemon, ScenarioResult<Pokemon>, SearchContext> {
+    private static final System.Logger LOGGER = System.getLogger(PokemonWriteScenarioStep.class.getName());
+
     private final FileService service;
     private final ConsoleService consoleService;
     private final JsonConverter<Pokemon> jsonConverter;
@@ -37,6 +39,7 @@ public class PokemonWriteScenarioStep implements ScenarioStep<Pokemon, ScenarioR
                                            @Nonnull SearchContext context) {
         String json = jsonConverter.toJson(parameter);
         if (json == null) {
+            LOGGER.log(System.Logger.Level.ERROR, "Convert error: json is null");
             throw new ConsoleUIException(ErrorCodes.NULL_JSON_RESULT);
         }
 
@@ -48,6 +51,7 @@ public class PokemonWriteScenarioStep implements ScenarioStep<Pokemon, ScenarioR
                 Path path = context.path();
 
                 if (path == null) {
+                    LOGGER.log(System.Logger.Level.ERROR, "Write error: path is null");
                     throw new ConsoleUIException(ErrorCodes.NULL_PATH);
                 }
                 service.writeToFile(path, json);

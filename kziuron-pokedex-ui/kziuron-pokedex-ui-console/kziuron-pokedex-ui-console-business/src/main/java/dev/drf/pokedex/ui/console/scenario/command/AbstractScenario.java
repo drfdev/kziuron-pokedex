@@ -14,14 +14,18 @@ abstract class AbstractScenario<C extends ScenarioContext, R> implements Scenari
 
     protected abstract ScenarioResult<R> safeExecute(@Nonnull C context);
 
+    protected abstract System.Logger getLogger();
+
     @Nonnull
     @Override
     public ScenarioResult<R> execute(@Nonnull C context) {
         try {
             return safeExecute(context);
         } catch (ConsoleUIException uiEx) {
+            getLogger().log(System.Logger.Level.ERROR, "UI console error", uiEx);
             return ScenarioResult.error(ScenarioError.of(uiEx.getErrorCode(), "UI Console Error: " + uiEx.getMessage()));
         } catch (Exception ex) {
+            getLogger().log(System.Logger.Level.ERROR, "Unexpected error", ex);
             return ScenarioResult.error(ScenarioError.of(INNER_ERROR, "Unexpected error: " + ex.getMessage()));
         }
     }

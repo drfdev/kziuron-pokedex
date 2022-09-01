@@ -6,10 +6,7 @@ import dev.drf.pokedex.api.common.ApiResult;
 import dev.drf.pokedex.model.Pokemon;
 import dev.drf.pokedex.model.dictionary.ElementType;
 import dev.drf.pokedex.model.dictionary.PokemonType;
-import dev.drf.pokedex.ui.console.AuthorizationService;
-import dev.drf.pokedex.ui.console.CommandDetector;
-import dev.drf.pokedex.ui.console.ConsoleService;
-import dev.drf.pokedex.ui.console.Scenario;
+import dev.drf.pokedex.ui.console.*;
 import dev.drf.pokedex.ui.console.command.CommandContext;
 import dev.drf.pokedex.ui.console.command.Commands;
 import dev.drf.pokedex.ui.console.scenario.ScenarioContext;
@@ -37,11 +34,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
@@ -63,6 +60,9 @@ class UiConsoleSpringConfigurationTest {
 
     @Autowired
     private List<Scenario<? extends ScenarioContext, ?>> scenarioList;
+
+    @Autowired
+    private ScenarioExecutor scenarioExecutor;
 
     @Autowired
     private ConsoleService consoleService;
@@ -214,5 +214,51 @@ class UiConsoleSpringConfigurationTest {
         ElementType targetElementType = target.getPokemonElement();
         assertEquals(3L, targetElementType.getCode());
         assertEquals("test-el", targetElementType.getName());
+    }
+
+    @Test
+    void shouldDetectCommandSearch_whenCorrectSearchCommandAndUseScenarioExecuter() {
+        // arrange
+        String text = "search-version -console";
+
+        AtomicInteger counter = new AtomicInteger(0);
+        Mockito.when(consoleService.read()).then(invocationOnMock -> {
+            int value = counter.incrementAndGet();
+            return value == 1 ? "12500" : "4";
+        });
+        Mockito.when(searchPokemonApiService.getByVersion(anyLong(), anyInt())).thenReturn(ApiResult.success(new Pokemon()));
+
+        // act
+        CommandContext context = commandDetector.detect(text);
+
+        // assert
+        assertNotNull(context);
+        assertEquals(Commands.SEARCH_BY_VERSION, context.command());
+        assertNotNull(context.parameters());
+
+        ScenarioContext parameters = context.parameters();
+        assertEquals(SearchContext.class, parameters.getClass());
+
+        SearchContext searchContext = (SearchContext) parameters;
+        assertEquals(ContextType.SEARCH, searchContext.contextType());
+        assertEquals(DataType.CONSOLE, searchContext.dataType());
+
+        // execute with executor
+        ScenarioResult<Pokemon> result = scenarioExecutor.execute(context);
+
+        // assert execute scenario
+        assertNotNull(result);
+        assertEquals(ScenarioStatus.SUCCESS, result.status());
+        assertNotNull(result.payload());
+
+        ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<Integer> versionCaptor = ArgumentCaptor.forClass(Integer.class);
+        Mockito.verify(searchPokemonApiService).getByVersion(idCaptor.capture(), versionCaptor.capture());
+
+        Long id = idCaptor.getValue();
+        Integer version = versionCaptor.getValue();
+
+        assertEquals(12_500L, id);
+        assertEquals(4, version);
     }
 }

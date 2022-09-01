@@ -19,6 +19,8 @@ import static dev.drf.pokedex.ui.console.error.ErrorCodes.INCORRECT_PARAMETERS;
 import static dev.drf.pokedex.ui.console.utils.ScenarioResultUtils.toScenarioResult;
 
 public class SearchByNameScenario extends AbstractScenario<SearchContext, List<Pokemon>> {
+    private static final System.Logger LOGGER = System.getLogger(SearchByNameScenario.class.getName());
+
     private final ConsoleService consoleService;
     private final SearchPokemonApiService searchPokemonApiService;
     private final ScenarioStep<List<Pokemon>, ScenarioResult<List<Pokemon>>, SearchContext> pokemonWriteStep;
@@ -44,10 +46,12 @@ public class SearchByNameScenario extends AbstractScenario<SearchContext, List<P
         String nickname = consoleService.read();
 
         if (name == null && title == null && nickname == null) {
+            LOGGER.log(System.Logger.Level.ERROR, "Empty parameters: name, title and nickname");
             return ScenarioResult.error(ScenarioError.of(INCORRECT_PARAMETERS));
         }
 
         ApiResult<List<Pokemon>> pokemonResult = searchPokemonApiService.searchByPokemonName(name, title, nickname);
+        LOGGER.log(System.Logger.Level.INFO, "Get result: {}", pokemonResult);
 
         ScenarioResult<List<Pokemon>> result = toScenarioResult(pokemonResult);
         if (result.status() == ScenarioStatus.ERROR
@@ -56,6 +60,11 @@ public class SearchByNameScenario extends AbstractScenario<SearchContext, List<P
         }
 
         return pokemonWriteStep.process(result.payload(), context);
+    }
+
+    @Override
+    protected System.Logger getLogger() {
+        return LOGGER;
     }
 
     @Nonnull

@@ -15,6 +15,8 @@ import java.nio.file.Path;
  * Загрузка данных из файла, в формате JSON
  */
 public class PokemonReadScenarioStep implements ScenarioStep<Path, Pokemon, ModifyContext> {
+    private static final System.Logger LOGGER = System.getLogger(PokemonReadScenarioStep.class.getName());
+
     private final FileService service;
     private final JsonConverter<Pokemon> converter;
 
@@ -32,6 +34,7 @@ public class PokemonReadScenarioStep implements ScenarioStep<Path, Pokemon, Modi
         Pokemon pokemon = converter.parse(fileData);
 
         if (pokemon == null) {
+            LOGGER.log(System.Logger.Level.ERROR, "Parse error: pokemon is null");
             throw new ConsoleUIException(ErrorCodes.NULL_PARSE_RESULT);
         }
 

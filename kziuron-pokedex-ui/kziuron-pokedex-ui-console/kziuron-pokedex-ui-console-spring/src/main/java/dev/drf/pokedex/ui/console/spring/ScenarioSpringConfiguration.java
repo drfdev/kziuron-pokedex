@@ -4,12 +4,14 @@ import dev.drf.pokedex.api.business.PokemonApiService;
 import dev.drf.pokedex.api.business.SearchPokemonApiService;
 import dev.drf.pokedex.model.Pokemon;
 import dev.drf.pokedex.ui.console.*;
+import dev.drf.pokedex.ui.console.scenario.ScenarioContext;
 import dev.drf.pokedex.ui.console.scenario.ScenarioResult;
 import dev.drf.pokedex.ui.console.scenario.ScenarioStep;
 import dev.drf.pokedex.ui.console.scenario.command.*;
 import dev.drf.pokedex.ui.console.scenario.context.AuthorizationContext;
 import dev.drf.pokedex.ui.console.scenario.context.ModifyContext;
 import dev.drf.pokedex.ui.console.scenario.context.SearchContext;
+import dev.drf.pokedex.ui.console.scenario.execute.ScenarioExecutorImpl;
 import dev.drf.pokedex.ui.console.scenario.result.AuthorizationToken;
 import dev.drf.pokedex.ui.console.scenario.step.PokemonReadScenarioStep;
 import dev.drf.pokedex.ui.console.scenario.step.PokemonWriteListScenarioStep;
@@ -95,5 +97,10 @@ public class ScenarioSpringConfiguration {
                                                                                                   ConsoleService consoleService,
                                                                                                   JsonConverter<Pokemon> jsonConverter) {
         return new PokemonWriteScenarioStep(service, consoleService, jsonConverter);
+    }
+
+    @Bean
+    public ScenarioExecutor scenarioExecutor(List<Scenario<? extends ScenarioContext, ?>> scenarioList) {
+        return new ScenarioExecutorImpl(scenarioList);
     }
 }

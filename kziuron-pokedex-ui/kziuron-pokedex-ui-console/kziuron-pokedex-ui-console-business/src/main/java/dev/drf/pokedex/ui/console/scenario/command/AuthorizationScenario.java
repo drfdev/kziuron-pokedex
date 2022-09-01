@@ -17,6 +17,8 @@ import static dev.drf.pokedex.ui.console.error.ErrorCodes.AUTHORIZATION_FAILED;
 import static dev.drf.pokedex.ui.console.error.ErrorCodes.NULL_LOGIN_PASSWORD;
 
 public class AuthorizationScenario extends AbstractMultipleAttemptsScenario<AuthorizationContext, AuthorizationToken> {
+    private static final System.Logger LOGGER = System.getLogger(AuthorizationScenario.class.getName());
+
     private static final int DEFAULT_ATTEMPTS_COUNT = 3;
 
     private final AuthorizationService authorizationService;
@@ -33,6 +35,11 @@ public class AuthorizationScenario extends AbstractMultipleAttemptsScenario<Auth
     protected ScenarioResult<AuthorizationToken> safeExecute(@Nonnull AuthorizationContext context) {
         MultipleAttemptsContext<AuthorizationContext> multipleContext = MultipleAttemptsContext.of(context, DEFAULT_ATTEMPTS_COUNT);
         return multipleExecute(multipleContext);
+    }
+
+    @Override
+    protected System.Logger getLogger() {
+        return LOGGER;
     }
 
     @Nonnull
@@ -53,6 +60,9 @@ public class AuthorizationScenario extends AbstractMultipleAttemptsScenario<Auth
         String password = consoleService.read();
 
         if (login == null || password == null) {
+            boolean isLoginNull = login == null;
+            boolean isPasswordNull = password == null;
+            LOGGER.log(System.Logger.Level.ERROR, "Empty parameters, login: {}, password: {}", isLoginNull, isPasswordNull);
             return ScenarioResult.error(ScenarioError.of(NULL_LOGIN_PASSWORD, "Login or password is null"));
         }
 

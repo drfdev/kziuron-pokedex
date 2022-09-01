@@ -19,6 +19,8 @@ import static dev.drf.pokedex.ui.console.error.ErrorCodes.UNKNOWN_COMMAND;
 import static dev.drf.pokedex.ui.console.error.ErrorCodes.UNKNOWN_CONTEXT_TYPE;
 
 public class CommandDetectorImpl implements CommandDetector {
+    private static final System.Logger LOGGER = System.getLogger(CommandDetectorImpl.class.getName());
+
     private static final String SPLIT_PATTERN = "\\s+";
     private static final String[] EMPTY = new String[0];
 
@@ -47,6 +49,7 @@ public class CommandDetectorImpl implements CommandDetector {
         Command command = commands.get(commandName);
 
         if (command == null) {
+            LOGGER.log(System.Logger.Level.ERROR, "Command not found, unknown command: {}", commandName);
             throw new ConsoleUIException(UNKNOWN_COMMAND, "Unknown command, name: " + commandName);
         }
 
@@ -54,12 +57,14 @@ public class CommandDetectorImpl implements CommandDetector {
         ScenarioContextBuilder scenarioContextBuilder = scenarioContextBuilders.get(contextType);
 
         if (scenarioContextBuilder == null) {
+            LOGGER.log(System.Logger.Level.ERROR, "Context builder not found, contextType: {}", contextType);
             throw new ConsoleUIException(UNKNOWN_CONTEXT_TYPE, "Unknown context type: " + contextType);
         }
 
         String[] params = getParams(vals);
         ScenarioContext parameters = scenarioContextBuilder.build(params);
 
+        LOGGER.log(System.Logger.Level.INFO, "Command context built, command: {}, parameters: {}", command, parameters);
         return new CommandContext(command, parameters);
     }
 

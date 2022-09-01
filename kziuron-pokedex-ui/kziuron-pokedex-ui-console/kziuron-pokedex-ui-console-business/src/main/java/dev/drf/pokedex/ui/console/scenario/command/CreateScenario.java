@@ -19,6 +19,8 @@ import static dev.drf.pokedex.ui.console.error.ErrorCodes.INCORRECT_PARAMETERS;
 import static dev.drf.pokedex.ui.console.utils.ScenarioResultUtils.toScenarioResult;
 
 public class CreateScenario extends AbstractScenario<ModifyContext, Pokemon> {
+    private static final System.Logger LOGGER = System.getLogger(CreateScenario.class.getName());
+
 
     private final ConsoleService consoleService;
     private final PokemonApiService pokemonApiService;
@@ -39,6 +41,7 @@ public class CreateScenario extends AbstractScenario<ModifyContext, Pokemon> {
         String filePath = consoleService.read();
 
         if (filePath == null) {
+            LOGGER.log(System.Logger.Level.ERROR, "File path is null");
             return ScenarioResult.error(ScenarioError.of(INCORRECT_PARAMETERS));
         }
 
@@ -46,7 +49,13 @@ public class CreateScenario extends AbstractScenario<ModifyContext, Pokemon> {
         Pokemon pokemon = pokemonReadStep.process(path, context);
 
         ApiResult<Pokemon> result = pokemonApiService.create(pokemon);
+        LOGGER.log(System.Logger.Level.INFO, "Get result: {}", result);
         return toScenarioResult(result);
+    }
+
+    @Override
+    protected System.Logger getLogger() {
+        return LOGGER;
     }
 
     @Nonnull

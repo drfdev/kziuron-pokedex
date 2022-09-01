@@ -20,6 +20,8 @@ import java.util.List;
  * На экран или в файл в зависимости от параметра вывода
  */
 public class PokemonWriteListScenarioStep implements ScenarioStep<List<Pokemon>, ScenarioResult<List<Pokemon>>, SearchContext> {
+    private static final System.Logger LOGGER = System.getLogger(PokemonWriteListScenarioStep.class.getName());
+
     private final FileService service;
     private final ConsoleService consoleService;
     private final JsonConverter<List<Pokemon>> jsonConverter;
@@ -38,6 +40,7 @@ public class PokemonWriteListScenarioStep implements ScenarioStep<List<Pokemon>,
                                                  @Nonnull SearchContext context) {
         String json = jsonConverter.toJson(parameter);
         if (json == null) {
+            LOGGER.log(System.Logger.Level.ERROR, "Convert error: json is null");
             throw new ConsoleUIException(ErrorCodes.NULL_JSON_RESULT);
         }
 
@@ -49,6 +52,7 @@ public class PokemonWriteListScenarioStep implements ScenarioStep<List<Pokemon>,
                 Path path = context.path();
 
                 if (path == null) {
+                    LOGGER.log(System.Logger.Level.ERROR, "Write error: path is null");
                     throw new ConsoleUIException(ErrorCodes.NULL_PATH);
                 }
                 service.writeToFile(path, json);
