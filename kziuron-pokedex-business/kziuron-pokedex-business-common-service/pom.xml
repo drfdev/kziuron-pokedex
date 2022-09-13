@@ -6,17 +6,18 @@
 
     <parent>
         <groupId>dev.drf.pokedex</groupId>
-        <artifactId>kziuron-pokedex</artifactId>
+        <artifactId>kziuron-pokedex-business</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kziuron-pokedex-api</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>kziuron-pokedex-business-common-service</artifactId>
 
-    <modules>
-        <module>kziuron-pokedex-common-api</module>
-        <module>kziuron-pokedex-business-api</module>
-        <module>kziuron-pokedex-core-api</module>
-    </modules>
+    <dependencies>
+        <!-- project -->
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-common</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -6,31 +6,32 @@
 
     <parent>
         <groupId>dev.drf.pokedex</groupId>
-        <artifactId>kziuron-pokedex</artifactId>
+        <artifactId>kziuron-pokedex-business</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kziuron-pokedex-common</artifactId>
+    <artifactId>kziuron-pokedex-business-spring</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+        <!-- business -->
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-business-common-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-business-pokemon-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-business-search-service</artifactId>
+        </dependency>
+
         <!-- project -->
         <dependency>
             <groupId>dev.drf.pokedex</groupId>
-            <artifactId>kziuron-pokedex-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>dev.drf.pokedex</groupId>
-            <artifactId>kziuron-pokedex-common-api</artifactId>
-        </dependency>
-
-        <!-- misc -->
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <artifactId>kziuron-pokedex-common</artifactId>
         </dependency>
     </dependencies>
 

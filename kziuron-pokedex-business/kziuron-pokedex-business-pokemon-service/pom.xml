@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>dev.drf.pokedex</groupId>
+        <artifactId>kziuron-pokedex-business</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>kziuron-pokedex-business-pokemon-service</artifactId>
+
+    <dependencies>
+        <!-- business-common -->
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-business-common-service</artifactId>
+        </dependency>
+
+        <!-- project -->
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dev.drf.pokedex</groupId>
+            <artifactId>kziuron-pokedex-business-api</artifactId>
+        </dependency>
+
+        <!-- logger -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk-platform-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

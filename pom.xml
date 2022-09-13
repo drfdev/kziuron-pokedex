@@ -80,6 +80,13 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- common api dependency sharing -->
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-common-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- transport -->
             <dependency>
                 <groupId>dev.drf.pokedex</groupId>

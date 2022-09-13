@@ -11,6 +11,34 @@
     </parent>
 
     <artifactId>kziuron-pokedex-business</artifactId>
+    <packaging>pom</packaging>
 
+    <modules>
+        <module>kziuron-pokedex-business-common-service</module>
+        <module>kziuron-pokedex-business-pokemon-service</module>
+        <module>kziuron-pokedex-business-search-service</module>
+        <module>kziuron-pokedex-business-spring</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- business modules share -->
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-business-common-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-business-pokemon-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-business-search-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
