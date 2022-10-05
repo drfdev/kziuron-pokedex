@@ -6,7 +6,7 @@
 
 Используемые штуки:
 
-* java 16
+* java 17
 * maven 3.8.1
 * IntelliJ IDEA 2021.3.1 (Community Edition)
 
