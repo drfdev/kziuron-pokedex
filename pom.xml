@@ -19,6 +19,7 @@
         <module>kziuron-pokedex-ui</module>
         <module>kziuron-pokedex-transport</module>
         <module>kziuron-pokedex-app</module>
+        <module>kziuron-pokedex-maven-plugins</module>
     </modules>
 
     <properties>
@@ -26,6 +27,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <java.version>17</java.version>
+        <maven-plugin-java.version>11</maven-plugin-java.version>
 
         <!-- spring -->
         <spring-boot.version>2.7.2</spring-boot.version>
@@ -54,6 +56,12 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <maven-plugin-plugin.version>3.6.4</maven-plugin-plugin.version>
+
+        <!-- plugins dev -->
+        <maven-plugin-api.version>3.8.5</maven-plugin-api.version>
+        <maven-plugin-annotations.version>3.6.4</maven-plugin-annotations.version>
+        <maven-project.version>2.2.1</maven-project.version>
     </properties>
 
     <dependencyManagement>
@@ -77,6 +85,13 @@
             <dependency>
                 <groupId>dev.drf.pokedex</groupId>
                 <artifactId>kziuron-pokedex-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- project plugins -->
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-model-processor-maven-plugin</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -224,6 +239,23 @@
                 <scope>test</scope>
             </dependency>
 
+
+            <!-- maven plugin -->
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-plugin-api</artifactId>
+                <version>${maven-plugin-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugin-tools</groupId>
+                <artifactId>maven-plugin-annotations</artifactId>
+                <version>${maven-plugin-annotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven</groupId>
+                <artifactId>maven-project</artifactId>
+                <version>${maven-project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -294,6 +326,11 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-plugin</artifactId>
+                    <version>${maven-plugin-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

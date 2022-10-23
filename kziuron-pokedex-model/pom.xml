@@ -12,5 +12,26 @@
 
     <artifactId>kziuron-pokedex-model</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-model-processor-maven-plugin</artifactId>
+                <version>${project.version}</version>
+                <executions>
+                    <execution>
+                        <id>process-model-id</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>process-model</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <modelPackage>dev.drf.pokedex.model</modelPackage>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
