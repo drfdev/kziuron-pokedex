@@ -8,7 +8,9 @@
 
 * java 17
 * maven 3.8.1
-* IntelliJ IDEA 2021.3.1 (Community Edition)
+* IntelliJ IDEA 2022.3.2 (Community Edition)
+* spring 6
+* spring boot 3
 
 ---
 
