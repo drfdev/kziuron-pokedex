@@ -27,6 +27,24 @@
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-project</artifactId>
         </dependency>
+
+        <!-- misc -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+
+        <!-- java parser -->
+        <dependency>
+            <groupId>com.github.javaparser</groupId>
+            <artifactId>javaparser-core</artifactId>
+        </dependency>
+
+        <!-- javapoet -->
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

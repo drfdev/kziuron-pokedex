@@ -29,6 +29,8 @@
                 </executions>
                 <configuration>
                     <modelPackage>dev.drf.pokedex.model</modelPackage>
+                    <mainInterface>dev.drf.pokedex.model.IdentifiableEntity</mainInterface>
+                    <cloneName>PokedexClonerUtils</cloneName>
                 </configuration>
             </plugin>
         </plugins>
