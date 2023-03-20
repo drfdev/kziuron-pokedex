@@ -90,11 +90,11 @@ class PokemonJsonConverterDeserializeTest {
     }
 
     @Test
-    void shouldCorrectDeserialize_whenPokemonHasPokemonElement() {
+    void shouldCorrectDeserialize_whenPokemonHasElementType() {
         // arrange
         String json = """
                 {
-                    "pokemonElement":{
+                    "elementType":{
                         "code":3,
                         "name":"test"
                     }
@@ -106,9 +106,9 @@ class PokemonJsonConverterDeserializeTest {
 
         // assert
         assertNotNull(result);
-        assertNotNull(result.getPokemonElement());
-        assertEquals(3L, result.getPokemonElement().getCode());
-        assertEquals("test", result.getPokemonElement().getName());
+        assertNotNull(result.getElementType());
+        assertEquals(3L, result.getElementType().getCode());
+        assertEquals("test", result.getElementType().getName());
     }
 
     @Test

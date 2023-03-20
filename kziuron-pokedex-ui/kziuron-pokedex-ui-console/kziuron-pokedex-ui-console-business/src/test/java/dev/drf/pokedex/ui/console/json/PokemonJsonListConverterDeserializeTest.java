@@ -140,18 +140,18 @@ class PokemonJsonListConverterDeserializeTest {
     }
 
     @Test
-    void shouldCorrectDeserialize_whenPokemonHasPokemonElement() {
+    void shouldCorrectDeserialize_whenPokemonHasElementType() {
         // arrange
         String json = """
                 [
                     {
-                        "pokemonElement":{
+                        "elementType":{
                             "code":3,
                             "name":"test"
                         }
                     },
                     {
-                        "pokemonElement":{
+                        "elementType":{
                             "code":5,
                             "name":"stub"
                         }
@@ -166,13 +166,13 @@ class PokemonJsonListConverterDeserializeTest {
         assertNotNull(result);
         assertThat(result, containsInAnyOrder(
                 allOf(
-                        hasProperty("pokemonElement", allOf(
+                        hasProperty("elementType", allOf(
                                 hasProperty("code", equalTo(3L)),
                                 hasProperty("name", equalTo("test"))
                         ))
                 ),
                 allOf(
-                        hasProperty("pokemonElement", allOf(
+                        hasProperty("elementType", allOf(
                                 hasProperty("code", equalTo(5L)),
                                 hasProperty("name", equalTo("stub"))
                         ))

@@ -107,13 +107,13 @@ class PokemonJsonListConverterTest {
     }
 
     @Test
-    void shouldCorrectFullyConvert_whenPokemonHasPokemonElement() {
+    void shouldCorrectFullyConvert_whenPokemonHasElementType() {
         // arrange
         Pokemon pokemon1 = new Pokemon();
-        pokemon1.setPokemonElement(asDictionary(ElementType.class, 3L, "test-3"));
+        pokemon1.setElementType(asDictionary(ElementType.class, 3L, "test-3"));
 
         Pokemon pokemon2 = new Pokemon();
-        pokemon2.setPokemonElement(asDictionary(ElementType.class, 7L, "test-7"));
+        pokemon2.setElementType(asDictionary(ElementType.class, 7L, "test-7"));
 
         // act
         String json = converter.toJson(Lists.newArrayList(pokemon1, pokemon2));
@@ -123,10 +123,10 @@ class PokemonJsonListConverterTest {
         assertNotNull(result);
         assertThat(result, containsInAnyOrder(
                 allOf(
-                        hasDictionary("pokemonElement", 3L, "test-3")
+                        hasDictionary("elementType", 3L, "test-3")
                 ),
                 allOf(
-                        hasDictionary("pokemonElement", 7L, "test-7")
+                        hasDictionary("elementType", 7L, "test-7")
                 )
         ));
     }

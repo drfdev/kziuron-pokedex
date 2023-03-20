@@ -73,10 +73,10 @@ class PokemonJsonConverterTest {
     }
 
     @Test
-    void shouldCorrectFullyConvert_whenPokemonHasPokemonElement() {
+    void shouldCorrectFullyConvert_whenPokemonHasElementType() {
         // arrange
         Pokemon pokemon = new Pokemon();
-        pokemon.setPokemonElement(asDictionary(ElementType.class, 3L, "test"));
+        pokemon.setElementType(asDictionary(ElementType.class, 3L, "test"));
 
         // act
         String json = converter.toJson(pokemon);
@@ -84,9 +84,9 @@ class PokemonJsonConverterTest {
 
         // assert
         assertNotNull(result);
-        assertNotNull(result.getPokemonElement());
-        assertEquals(3L, result.getPokemonElement().getCode());
-        assertEquals("test", result.getPokemonElement().getName());
+        assertNotNull(result.getElementType());
+        assertEquals(3L, result.getElementType().getCode());
+        assertEquals("test", result.getElementType().getName());
     }
 
     @Test

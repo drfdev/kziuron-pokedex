@@ -7,10 +7,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.lang.model.element.Modifier;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ClassGenerator {
     private static final String CLONE_METHOD_NAME = "clone";
+    private static final ClassName ARRAY_LIST_TYPE_NAME = ClassName.get(ArrayList.class);
 
     private ClassGenerator() {
     }
@@ -118,7 +120,7 @@ public final class ClassGenerator {
         var setterStr = setter(fieldName);
 
         var checkNullStatement = String.format("if (value.%s != null)", getterStr);
-        var initArrayStatement = String.format("result.%s(new ArrayList<$T>(value.%s.size()))", setterStr, getterStr);
+        var initArrayStatement = String.format("result.%s(new $T<$T>(value.%s.size()))", setterStr, getterStr);
         var forLoopStatement = String.format("for ($T item : value.%s)", getterStr);
         var addItemStatement = String.format("result.%s.add(item)", getterStr);
 
@@ -129,7 +131,7 @@ public final class ClassGenerator {
                 // проверка на null
                 .beginControlFlow(checkNullStatement, genericType)
                 // инициализация
-                .addStatement(initArrayStatement, genericType)
+                .addStatement(initArrayStatement, ARRAY_LIST_TYPE_NAME, genericType)
                 // цикл с добавлением элементов
                 .beginControlFlow(forLoopStatement, genericType)
                 .addStatement(addItemStatement)

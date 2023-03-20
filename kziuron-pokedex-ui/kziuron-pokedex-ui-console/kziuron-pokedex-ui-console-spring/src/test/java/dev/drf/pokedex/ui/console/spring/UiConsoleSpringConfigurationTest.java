@@ -137,7 +137,7 @@ class UiConsoleSpringConfigurationTest {
                         "code":2,
                         "name":"test-type"
                     },
-                    "pokemonElement":{
+                    "elementType":{
                         "code":3,
                         "name":"test-el"
                     }
@@ -187,13 +187,13 @@ class UiConsoleSpringConfigurationTest {
         assertNotNull(pokemon);
         assertEquals(10_000L, pokemon.getId());
         assertNotNull(pokemon.getPokemonType());
-        assertNotNull(pokemon.getPokemonElement());
+        assertNotNull(pokemon.getElementType());
 
         PokemonType pokemonType = pokemon.getPokemonType();
         assertEquals(2L, pokemonType.getCode());
         assertEquals("test-type", pokemonType.getName());
 
-        ElementType elementType = pokemon.getPokemonElement();
+        ElementType elementType = pokemon.getElementType();
         assertEquals(3L, elementType.getCode());
         assertEquals("test-el", elementType.getName());
 
@@ -205,13 +205,13 @@ class UiConsoleSpringConfigurationTest {
         assertNotNull(target);
         assertEquals(10_000L, target.getId());
         assertNotNull(target.getPokemonType());
-        assertNotNull(target.getPokemonElement());
+        assertNotNull(target.getElementType());
 
         PokemonType targetPokemonType = target.getPokemonType();
         assertEquals(2L, targetPokemonType.getCode());
         assertEquals("test-type", targetPokemonType.getName());
 
-        ElementType targetElementType = target.getPokemonElement();
+        ElementType targetElementType = target.getElementType();
         assertEquals(3L, targetElementType.getCode());
         assertEquals("test-el", targetElementType.getName());
     }

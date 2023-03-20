@@ -114,13 +114,13 @@ class PokemonJsonListConverterSerializeTest {
     }
 
     @Test
-    void shouldCorrectConvertToJson_whenPokemonHasPokemonElement() {
+    void shouldCorrectConvertToJson_whenPokemonHasElementType() {
         // arrange
         Pokemon pokemon1 = new Pokemon();
-        pokemon1.setPokemonElement(asDictionary(ElementType.class, 3L, "test-3"));
+        pokemon1.setElementType(asDictionary(ElementType.class, 3L, "test-3"));
 
         Pokemon pokemon2 = new Pokemon();
-        pokemon2.setPokemonElement(asDictionary(ElementType.class, 5L, "test-5"));
+        pokemon2.setElementType(asDictionary(ElementType.class, 5L, "test-5"));
 
         // act
         String value = converter.toJson(Lists.newArrayList(pokemon1, pokemon2));
@@ -129,12 +129,12 @@ class PokemonJsonListConverterSerializeTest {
         assertNotNull(value);
 
         // pokemon 1
-        assertTrue(value.contains("\"pokemonElement\":{"));
+        assertTrue(value.contains("\"elementType\":{"));
         assertTrue(value.contains("\"code\":3"));
         assertTrue(value.contains("\"name\":\"test-3\""));
 
         // pokemon 2
-        assertTrue(value.contains("\"pokemonElement\":{"));
+        assertTrue(value.contains("\"elementType\":{"));
         assertTrue(value.contains("\"code\":5"));
         assertTrue(value.contains("\"name\":\"test-5\""));
     }

@@ -60,11 +60,11 @@ public class Pokemon extends BusinessEntity {
         this.pokemonType = pokemonType;
     }
 
-    public ElementType getPokemonElement() {
+    public ElementType getElementType() {
         return elementType;
     }
 
-    public void setPokemonElement(ElementType elementType) {
+    public void setElementType(ElementType elementType) {
         this.elementType = elementType;
     }
 
@@ -136,7 +136,7 @@ public class Pokemon extends BusinessEntity {
     public String toString() {
         return "Pokemon{" +
                 "pokemonType=" + pokemonType +
-                ", pokemonElement=" + elementType +
+                ", elementType=" + elementType +
                 ", status=" + status +
                 ", catchPlace=" + catchPlace +
                 ", catchDate=" + catchDate +
@@ -145,6 +145,6 @@ public class Pokemon extends BusinessEntity {
                 ", activeSkills=" + activeSkills +
                 ", passiveSkills=" + passiveSkills +
                 ", characterStructure=" + characterStructure +
-                "} " + super.toString();
+                '}';
     }
 }
