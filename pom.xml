@@ -60,6 +60,7 @@
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <maven-plugin-plugin.version>3.6.4</maven-plugin-plugin.version>
         <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
 
         <!-- plugins dev -->
         <maven-plugin-api.version>3.8.5</maven-plugin-api.version>
@@ -97,6 +98,13 @@
             <dependency>
                 <groupId>dev.drf.pokedex</groupId>
                 <artifactId>kziuron-pokedex-model-processor-maven-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- project app dependencies -->
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-ui-console-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -153,6 +161,11 @@
                         <groupId>commons-logging</groupId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
 
 
@@ -358,6 +371,16 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>${build-helper-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

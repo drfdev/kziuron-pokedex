@@ -11,6 +11,10 @@
     </parent>
 
     <artifactId>kziuron-pokedex-app-single-console</artifactId>
+    <packaging>pom</packaging>
 
+    <modules>
+        <module>kziuron-pokedex-app-single-console-business-stub</module>
+    </modules>
 
 </project>

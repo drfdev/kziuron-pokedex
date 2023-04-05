@@ -1,0 +1,13 @@
+spring:
+  main:
+    web-application-type: none
+
+# Authorization Config (see ListAuthorizationRawConfig class)
+list-authorization:
+  ignore-case: false
+  users:
+    - { login: 'cat', password: 'cat123' }
+    - { login: 'dog', password: 'super-dog' }
+    - { login: 'paw', password: 'mypaw' }
+    - { login: 'number', password: '1q2w' }
+    - { login: 'super', password: 'i_am_the_super' }
