@@ -31,8 +31,8 @@
         <maven-plugin-java.version>11</maven-plugin-java.version>
 
         <!-- spring -->
-        <spring-boot.version>3.0.2</spring-boot.version>
-        <spring.version>6.0.5</spring.version>
+        <spring-boot.version>3.0.6</spring-boot.version>
+        <spring.version>6.0.8</spring.version>
 
         <!-- misc -->
         <jsr305.version>3.0.2</jsr305.version>
