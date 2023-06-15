@@ -15,6 +15,7 @@
 
     <modules>
         <module>kziuron-pokedex-ui-console</module>
+        <module>kziuron-pokedex-ui-spring-shell</module>
     </modules>
 
 

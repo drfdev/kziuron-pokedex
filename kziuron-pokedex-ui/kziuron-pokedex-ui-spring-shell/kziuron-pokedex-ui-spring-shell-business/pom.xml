@@ -6,11 +6,11 @@
 
     <parent>
         <groupId>dev.drf.pokedex</groupId>
-        <artifactId>kziuron-pokedex-ui-console</artifactId>
+        <artifactId>kziuron-pokedex-ui-spring-shell</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>kziuron-pokedex-ui-console-business</artifactId>
+    <artifactId>kziuron-pokedex-ui-spring-shell-business</artifactId>
 
     <dependencies>
         <!-- project -->
@@ -25,6 +25,12 @@
         <dependency>
             <groupId>dev.drf.pokedex</groupId>
             <artifactId>kziuron-pokedex-common</artifactId>
+        </dependency>
+
+        <!-- spring shell -->
+        <dependency>
+            <groupId>org.springframework.shell</groupId>
+            <artifactId>spring-shell-starter</artifactId>
         </dependency>
 
         <!-- misc -->

@@ -31,7 +31,7 @@
         <maven-plugin-java.version>11</maven-plugin-java.version>
 
         <!-- spring -->
-        <spring-boot.version>3.0.6</spring-boot.version>
+        <spring-boot.version>3.1.0</spring-boot.version>
         <spring.version>6.0.8</spring.version>
 
         <!-- misc -->
@@ -42,8 +42,8 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
 
         <!-- logger -->
-        <slf4j.version>2.0.0</slf4j.version>
-        <logback-classic.version>1.4.0</logback-classic.version>
+        <slf4j.version>2.0.7</slf4j.version>
+        <logback-classic.version>1.4.7</logback-classic.version>
 
         <!-- test -->
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
@@ -107,6 +107,11 @@
                 <artifactId>kziuron-pokedex-ui-console-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>dev.drf.pokedex</groupId>
+                <artifactId>kziuron-pokedex-ui-spring-shell-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- common api dependency sharing -->
             <dependency>
@@ -167,6 +172,11 @@
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.shell</groupId>
+                <artifactId>spring-shell-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
 
 
             <!-- logger -->
@@ -183,6 +193,11 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
                 <version>${logback-classic.version}</version>
             </dependency>
 
